@@ -1,0 +1,31 @@
+<div class="wrapper" #wrapperRef>
+    <div class="overview">
+        <div class="container" #containerRef>
+            <div class="content">
+                <div class="heart-emoji">💖</div>
+                <div class="info">
+                    <div class="title">
+                        <div class="first-line">
+                            <h1>Adiye Azhagiiii</h1><span>😍</span>
+                        </div>
+                        <p>Yediii...🫰🏻 I make something special to you... 🫵🏻😜</p><br>
+                        <p>Mandaya thookkatha... Sirikka kudathu sariya...🫣</p>
+                    </div>
+
+                </div>
+                <div class="action-btn">
+                    <button mat-raised-button (click)="onClickButton()">Kai piduchuko diii... <span>🫴🏻</span></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Hearts rendered at wrapper level (behind the card) -->
+    <span *ngFor="let h of hearts; trackBy: trackById" class="snow-heart" [style.top.px]="h.top"
+        [style.left.px]="h.left" [style.fontSize]="h.size" [style.animationDuration]="h.duration"
+        [style.animationDelay]="h.delay" [style.--rot]="h.rot" [style.--driftX]="h.driftX">
+        💖
+    </span>
+
+</div>

@@ -1,0 +1,390 @@
+// .wrapper {
+//     width: 100%;
+//     height: 90vh;
+//     margin: 0;
+//     padding: 0;
+//     background: linear-gradient(pink, #fff);
+//     box-sizing: border-box;
+// }
+
+// .overview {
+//     width: 100%;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     .container {
+//         width: 50%;
+//         height: 48%;
+//         background: #fff;
+//         background-blend-mode: darken;
+//         border-radius: 16px;
+//         border: 1px solid pink;
+//         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+//         padding: 10px;
+
+//         .content {
+//             width: 100%;
+//             height: 100%;
+//             text-align: center;
+
+//             .heart-emoji {
+//                 font-size: 45px;
+//             }
+
+//             .info {
+//                 position: relative;
+//                 display: inline-block;
+//                 padding: 20px 30px;
+//                 border-radius: 20px;
+//                 background: #fff;
+//                 cursor: pointer;
+//                 transition: transform 0.4s ease, box-shadow 0.4s ease;
+//                 overflow: hidden;
+//             }
+
+//             .info h1 {
+//                 font-size: 40px;
+//                 color: #ff91a4;
+//                 font-weight: bold;
+//                 font-family: cursive;
+//                 margin: 10px;
+//             }
+
+//             .info p {
+//                 font-size: 20px;
+//                 color: rgb(180, 45, 180);
+//                 font-family: cursive;
+//                 margin: 5px;
+//             }
+
+//             /* remove background glow */
+//             .info::after {
+//                 display: none;
+//             }
+
+//             .info span {
+//                 position: absolute;
+//                 font-size: 20px;
+//                 color: #ff91a4;
+//                 opacity: 0;
+//                 pointer-events: none;
+//                 top: 50%;
+//                 left: 50%;
+//                 transform: translate(-50%, -50%);
+//             }
+
+//             /* burst effect */
+//             .info:hover span {
+//                 opacity: 1;
+//                 animation: sparkle 0.9s ease-out forwards;
+//             }
+
+//             /* sparkle burst animation */
+//             @keyframes sparkle {
+//                 0% {
+//                     transform: translate(-50%, -50%) scale(0.5);
+//                     opacity: 1;
+//                 }
+
+//                 100% {
+//                     transform: translate(var(--x), var(--y)) scale(1.2);
+//                     opacity: 0;
+//                 }
+//             }
+
+//             /* Different heart directions */
+//             .info span:nth-child(3) {
+//                 --x: -100px;
+//                 --y: -50px;
+//             }
+
+//             .info span:nth-child(4) {
+//                 --x: 100px;
+//                 --y: -60px;
+//             }
+
+//             .info span:nth-child(5) {
+//                 --x: -80px;
+//                 --y: 80px;
+//             }
+
+//             .info span:nth-child(6) {
+//                 --x: 90px;
+//                 --y: 60px;
+//             }
+
+//             .info span:nth-child(7) {
+//                 --x: 0px;
+//                 --y: -120px;
+//             }
+
+
+//             .action-btn {
+//                 display: flex;
+//                 justify-content: center;
+//                 align-items: center;
+
+//                 button {
+//                     display: flex;
+//                     justify-content: center;
+//                     align-items: center;
+//                     margin-top: 25px;
+//                     font-size: 25px;
+//                     padding: 25px 15px;
+//                     border-radius: 15px;
+//                     background: rgb(250, 141, 160);
+//                     font-family: cursive;
+//                     color: #fff;
+
+//                     span {
+//                         font-size: 30px;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, rgb(251, 185, 196), #fff);
+  //background: linear-gradient(135deg, #f8b1b1, #ffc6c6, #fdbed4, #ffc0df);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: wrapperFadeIn 3s ease forwards;
+
+  --sparkle-duration: 1.2s;
+  /* default sparkle duration */
+}
+
+.overview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 50%;
+  height: 50%;
+  background: #fff;
+  border: 1px solid pink;
+  border-radius: 16px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
+  padding: 10px;
+  position: relative;
+  z-index: 10;
+  /* card stays above hearts */
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.heart-emoji {
+  font-size: 45px;
+  animation: fade-in 4s ease-in forwards;
+}
+
+/* Info card */
+.info {
+  display: inline-block;
+  border-radius: 20px;
+  background: #fff;
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+/* First line with H1 + span */
+.info .first-line {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.info h1 {
+  font-size: 40px;
+  color: #ff91a4;
+  font-weight: bold;
+  font-family: cursive;
+  margin: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing-h1 4s steps(30, end) forwards,
+    blink 0.7s step-end infinite;
+  animation-delay: 2s;
+}
+
+.info .first-line span {
+  font-size: 40px;
+  opacity: 0;
+  animation: quick-fade-in 1.5s ease forwards, pulse 2s infinite;
+  animation-delay: 6s;
+}
+
+/* Paragraphs typing */
+.info p {
+  font-size: 20px;
+  color: rgb(180, 45, 180);
+  font-family: cursive;
+  margin: 5px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+}
+
+/* First paragraph */
+.info p:first-of-type {
+  animation: typing-para 6s steps(40, end) forwards,
+    blink 0.7s step-end infinite;
+  animation-delay: 8s;
+}
+
+/* Second paragraph */
+.info p:last-of-type {
+  animation: typing-para 6s steps(40, end) forwards,
+    blink 0.7s step-end infinite;
+  animation-delay: 14s;
+}
+
+/* Falling hearts */
+.snow-heart {
+  position: absolute;
+  top: -40px;
+  /* start above wrapper */
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.9;
+  animation-name: snowfall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) translateX(var(--driftX)) rotate(var(--rot));
+    opacity: 0.6;
+  }
+}
+
+/* Button */
+.action-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  opacity: 0;
+  animation: fade-in 2s ease 20s forwards;
+  cursor: pointer;
+}
+
+.action-btn button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 25px;
+  padding: 20px 16px;
+  border-radius: 15px;
+  background: rgb(250, 141, 160);
+  color: #fff;
+  font-family: cursive;
+}
+
+.action-btn button span {
+  font-size: 30px;
+  opacity: 0;
+  animation: quick-fade-in 1.5s ease 22s forwards;
+  animation-iteration-count: 1;
+  /* run only once */
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes quick-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes typing-h1 {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 12ch;
+  }
+}
+
+@keyframes typing-para {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 40ch;
+  }
+
+  /* adjust to match paragraph length */
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes wrapperFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
